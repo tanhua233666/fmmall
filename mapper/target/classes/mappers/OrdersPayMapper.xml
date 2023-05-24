@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanhua.fmmall.dao.OrdersPayMapper">
+    <resultMap id="BaseResultMap" type="com.tanhua.fmmall.entity.OrdersPay">
+        <id column="order_pay_id" jdbcType="VARCHAR" property="orderPayId" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="pay_url" jdbcType="VARCHAR" property="payUrl" />
+        <result column="pay_total" jdbcType="DOUBLE" property="payTotal" />
+        <result column="pay_status" jdbcType="VARCHAR" property="payStatus" />
+    </resultMap>
+
+    <insert id="addOrderPay" parameterType="com.tanhua.fmmall.entity.OrdersPay">
+        insert into orders_pay(
+            order_pay_id,
+            order_id,
+            pay_url,
+            pay_total,
+            pay_status)
+        values(#{orderPayId},#{orderId},#{payUrl},#{payTotal},#{payStatus});
+    </insert>
+
+    <select id="getOrderPayUrl" resultType="com.tanhua.fmmall.entity.OrdersPay" parameterType="string">
+        select order_pay_id,
+            order_id,
+            pay_url,
+            pay_total,
+            pay_status from orders_pay
+        where order_id = #{orderId}
+    </select>
+</mapper>
